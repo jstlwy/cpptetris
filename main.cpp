@@ -115,7 +115,7 @@ int main()
 	// --------------------
 	// Game state variables
 	// --------------------
-	int currentBagIndex {0};
+	std::size_t currentBagIndex {0};
 	int currentPieceNum {pieceBag.at(currentBagIndex)};
 	Tetromino t = Tetromino{currentPieceNum};
 

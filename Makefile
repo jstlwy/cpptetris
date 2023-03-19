@@ -1,4 +1,4 @@
-CXX := clang++
+CXX := g++
 CXXFLAGS := -std=c++17 -Wall
 LDFLAGS := -lncurses
 
@@ -6,14 +6,14 @@ LDFLAGS := -lncurses
 .PHONY: all clean
 
 src := $(wildcard *.cpp)
-headers := $(filter-out main.h, $(patsubst %.cpp, %.h, $(src)))
-obj := $(patsubst %.cpp, %.o, $(src))
+headers := $(addsuffix .h, $(basename $(filter-out main.cpp, $(src))))
+obj := $(addsuffix .o, $(basename $(src)))
 bin := tetris
 
 all: $(bin)
 
 $(bin): $(obj)
-	$(CXX) $(LDFLAGS) $^ -o $@
+	$(CXX) $^ -o $@ $(LDFLAGS)
 
 # Generic object file creation rule
 %.o: %.cpp
