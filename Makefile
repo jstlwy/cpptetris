@@ -1,23 +1,22 @@
 CXX := clang++
-CXXFLAGS := -std=c++17 -Wall
+CXXFLAGS := -std=c++17 -Wall -Wextra -Werror
 LDFLAGS := -lncurses
 
-# Declare names that indicate recipes, not files 
-.PHONY: all clean
-
-src := $(wildcard *.cpp)
-headers := $(filter-out main.h, $(patsubst %.cpp, %.h, $(src)))
-obj := $(patsubst %.cpp, %.o, $(src))
 bin := tetris
 
+.PHONY: all
 all: $(bin)
 
-$(bin): $(obj)
+$(bin): main.o tetromino.o
 	$(CXX) $(LDFLAGS) $^ -o $@
 
-# Generic object file creation rule
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -MMD -c $< -o $@
+main.o: main.cpp tetromino.hpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
 
+tetromino.o: tetromino.cpp tetromino.hpp
+	$(CXX) $(CXXFLAGS) -c $< -o $@
+
+.PHONY: clean
 clean:
 	rm -f *.d *.o $(bin)
+

@@ -1,5 +1,6 @@
 #ifndef TETROMINO_H
 #define TETROMINO_H
+
 #include <string_view>
 #include <array>
 
@@ -21,16 +22,9 @@ private:
 	std::string_view sprite;
 	// Piece "sprites" based on the Super Rotation System:
 	// https://tetris.fandom.com/wiki/SRS
-	static constexpr std::array<std::string_view, 7> tetrominoes = {
-		"    IIII        ",
-		"ZZ  ZZ   ",
-		" SSSS    ",
-		"OOOO",
-		" T TTT   ",
-		"  LLLL   ",
-		"J  JJJ   "
-	};
-	static constexpr std::array<int, 7> tetrominoSideLengths {{4, 3, 3, 2, 3, 3, 3}};
+	static const std::array<std::string_view, 7> tetrominoes;
+	static const std::array<int, 7> tetrominoSideLengths;
 };
 
 #endif
+

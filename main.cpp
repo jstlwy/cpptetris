@@ -5,7 +5,7 @@
 #include <thread>
 #include <random>
 #include <algorithm>
-#include "tetromino.h"
+#include "tetromino.hpp"
 
 constexpr int FIELD_WIDTH {12};
 constexpr int FIELD_HEIGHT {18};
@@ -115,7 +115,7 @@ int main()
 	// --------------------
 	// Game state variables
 	// --------------------
-	int currentBagIndex {0};
+	size_t currentBagIndex {0};
 	int currentPieceNum {pieceBag.at(currentBagIndex)};
 	Tetromino t = Tetromino{currentPieceNum};
 
@@ -372,9 +372,11 @@ void drawHUD(const int score, const int numLinesCleared, const int level)
 }
 
 
-void clearLinesFromField(std::array<char, FIELD_LENGTH>& field,
-	int numLinesToClear, int lowestLineToClear)
-{
+void clearLinesFromField(
+    std::array<char, FIELD_LENGTH>& field,
+	int numLinesToClear,
+    int lowestLineToClear
+) {
 	while (numLinesToClear > 0)
 	{
 		// Get number of lines to move down
@@ -510,3 +512,4 @@ bool pieceCanFit(const std::array<char, FIELD_LENGTH>& field, Tetromino& t)
 	}
 	return true;
 }
+
